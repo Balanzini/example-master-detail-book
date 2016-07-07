@@ -3,10 +3,11 @@ package com.jose.books.data.book.retrofit;
 import android.util.Log;
 
 import com.jose.books.data.book.BookDataSource;
-import com.jose.books.data.book.retrofit.model.OLBook;
+import com.jose.books.data.book.retrofit.mapper.BookApiToModelMapper;
 import com.jose.books.data.book.retrofit.model.OLBookList;
-import com.jose.books.domain.Book;
+import com.jose.books.domain.model.Book;
 
+import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -20,9 +21,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class BookRetrofitSource implements BookDataSource {
 
-    private RetrofitService retrofitService;
+    private static final String TAG = "BookRetrofitSource";
 
-    public BookRetrofitSource(){
+    private RetrofitService retrofitService;
+    private BookApiToModelMapper bookMapper;
+
+    public BookRetrofitSource(BookApiToModelMapper bookApiToModelMapper){
+        bookMapper = bookApiToModelMapper;
         init();
     }
 
@@ -36,21 +41,14 @@ public class BookRetrofitSource implements BookDataSource {
 
     }
     @Override
-    public List<Book> getBooks() {
+    public List<Book> getBooks() throws IOException {
         Call<OLBookList> call = retrofitService.getBooks();
 
-        call.enqueue(new Callback<OLBookList>() {
-            @Override
-            public void onResponse(Call<OLBookList> call, Response<OLBookList> response) {
-                Log.i("retrofit", response.body().getOlBookList().get(0).getTitle());
-            }
+        OLBookList olBookList;
 
-            @Override
-            public void onFailure(Call<OLBookList> call, Throwable t) {
+        olBookList = call.execute().body();
 
-            }
-        });
+        return bookMapper.mapBookListResponseToModel(olBookList);
 
-        return null;
     }
 }

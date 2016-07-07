@@ -1,4 +1,4 @@
-package com.jose.books.domain;
+package com.jose.books.domain.model;
 
 /**
  * Created by jose on 7/07/16.
@@ -7,11 +7,14 @@ public class Book {
     private String image;
     private String title;
     private String author;
+    private int publishYear;
+    private String id;
 
-    public Book(String title, String author, String image){
+    public Book(String id, String title, String author, String image){
         this.image = image;
         this.author = author;
         this.image = image;
+        this.id = id;
     }
 
     public String getImage() {
@@ -36,5 +39,17 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public int getPublishYear() {
+        return publishYear;
+    }
+
+    public void setPublishYear(int publishYear) {
+        this.publishYear = publishYear;
+    }
+
+    public String getId() {
+        return id;
     }
 }
