@@ -1,6 +1,6 @@
 package com.jose.books.app.di.module;
 
-import com.jose.books.data.book.BookDataSource;
+import com.jose.books.domain.interactor.GetAllBooks;
 import com.jose.books.ui.list.presenter.BookListPresenter;
 import com.jose.books.ui.list.presenter.BookListPresenterImp;
 
@@ -14,7 +14,7 @@ import dagger.Provides;
 public class PresenterModule {
 
     @Provides
-    BookListPresenter provideBookListPresenter(){
-        return new BookListPresenterImp();
+    BookListPresenter provideBookListPresenter(GetAllBooks getAllBooks){
+        return new BookListPresenterImp(getAllBooks);
     }
 }
