@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jose.books">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
     <application
         android:name=".app.base.BaseApplication"
         android:allowBackup="true"
