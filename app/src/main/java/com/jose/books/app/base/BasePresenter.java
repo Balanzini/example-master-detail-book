@@ -7,7 +7,7 @@ import com.jose.books.ui.View;
  */
 public abstract class BasePresenter<T extends View> {
 
-    T view;
+    protected T view;
 
     public void setView(T view){
         this.view = view;

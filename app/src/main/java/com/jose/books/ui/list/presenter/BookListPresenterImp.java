@@ -22,7 +22,7 @@ public class BookListPresenterImp extends BookListPresenter {
     }
 
     @Override
-    public String prueba() {
+    public void getBooks() {
         getAllBooks.getAllBooks(new GetAllBooks.Callback() {
             @Override
             public void onSuccess(List<Book> book) {
@@ -31,6 +31,7 @@ public class BookListPresenterImp extends BookListPresenter {
                 for(Book b:book) {
                     Log.i(TAG, b.getTitle());
                 }
+                view.onBookAvailable(book);
             }
 
             @Override
@@ -38,6 +39,5 @@ public class BookListPresenterImp extends BookListPresenter {
                 Log.e(TAG, "error");
             }
         });
-        return "Hola book";
     }
 }

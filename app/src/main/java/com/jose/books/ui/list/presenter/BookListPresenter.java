@@ -8,5 +8,5 @@ import com.jose.books.ui.list.view.BookListView;
  */
 public abstract class BookListPresenter extends BasePresenter<BookListView> {
 
-    public abstract String prueba();
+    public abstract void getBooks();
 }

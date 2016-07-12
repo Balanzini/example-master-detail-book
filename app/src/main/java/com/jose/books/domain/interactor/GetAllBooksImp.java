@@ -38,6 +38,13 @@ public class GetAllBooksImp extends BaseInteractor implements GetAllBooks {
             e.printStackTrace();
             callback.onError();
         }
-        callback.onSuccess(bookList);
+        final List<Book> finalBookList = bookList;
+        executeInMainThread(new Runnable() {
+            @Override
+            public void run() {
+                callback.onSuccess(finalBookList);
+            }
+        });
+
     }
 }
