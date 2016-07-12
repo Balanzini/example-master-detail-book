@@ -2,6 +2,8 @@ package com.jose.books.ui.list.view;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import com.jose.books.R;
 import com.jose.books.app.base.BaseActivity;
 import com.jose.books.domain.model.Book;
@@ -12,47 +14,40 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+public class BookListActivity extends BaseActivity implements BookListView {
 
-public class BookListActivity extends BaseActivity implements BookListView  {
+  private static final String TAG = "BookListActivity";
 
-    private static final String TAG = "BookListActivity";
+  @Inject BookListPresenter presenter;
 
-    @Inject
-    BookListPresenter presenter;
+  @Bind(R.id.rv_book_list) RecyclerView recyclerViewBook;
 
-    @BindView(R.id.rv_book_list)
-    RecyclerView recyclerViewBook;
+  private BookAdapter adapter;
 
-    private BookAdapter adapter;
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    ButterKnife.bind(this);
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+  }
 
-        ButterKnife.bind(this);
+  @Override
+  protected void onResume() {
+    super.onResume();
+    presenter.setView(this);
+    adapter = new BookAdapter();
+    recyclerViewBook.setAdapter(adapter);
+    presenter.getBooks();
+  }
 
-    }
+  @Override
+  public void onBookAvailable(List<Book> bookList) {
+    adapter.setBookList(bookList);
+  }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        presenter.setView(this);
-        adapter = new BookAdapter();
-        recyclerViewBook.setAdapter(adapter);
-        presenter.getBooks();
-    }
-
-    @Override
-    public void onBookAvailable(List<Book> bookList) {
-        adapter.setBookList(bookList);
-    }
-
-    @Override
-    protected void doInjection() {
-        component.inject(this);
-
-    }
+  @Override
+  protected void doInjection() {
+    component.inject(this);
+  }
 }

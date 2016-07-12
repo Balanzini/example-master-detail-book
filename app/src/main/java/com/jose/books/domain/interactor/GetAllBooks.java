@@ -8,13 +8,13 @@ import java.util.List;
 /**
  * Created by jose on 7/07/16.
  */
-public interface GetAllBooks extends Interactor{
+public interface GetAllBooks extends Interactor {
 
-    void getAllBooks(Callback callback);
+  void getAllBooks(Callback callback);
 
-    interface Callback{
-        void onSuccess(List<Book> book);
-        void onError();
-    }
+  interface Callback {
+    void onSuccess(List<Book> book);
 
+    void onError();
+  }
 }

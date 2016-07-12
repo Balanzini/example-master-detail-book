@@ -14,37 +14,36 @@ import java.util.List;
  */
 public class GetAllBooksImp extends BaseInteractor implements GetAllBooks {
 
-    private Callback callback;
-    private BookRepository bookRepository;
+  private Callback callback;
+  private BookRepository bookRepository;
 
-    public GetAllBooksImp(InteractorExecutor interactorExecutor,
-                          MainThreadExecutor mainThreadExecutor, BookRepository bookRepository) {
-        super(interactorExecutor, mainThreadExecutor);
-        this.bookRepository = bookRepository;
+  public GetAllBooksImp(InteractorExecutor interactorExecutor,
+      MainThreadExecutor mainThreadExecutor, BookRepository bookRepository) {
+    super(interactorExecutor, mainThreadExecutor);
+    this.bookRepository = bookRepository;
+  }
+
+  @Override
+  public void getAllBooks(Callback callback) {
+    this.callback = callback;
+    executeCurrentInteractor();
+  }
+
+  @Override
+  public void run() {
+    List<Book> bookList = null;
+    try {
+      bookList = bookRepository.getAllBooks();
+    } catch (IOException e) {
+      e.printStackTrace();
+      callback.onError();
     }
-
-    @Override
-    public void getAllBooks(Callback callback) {
-        this.callback = callback;
-        executeCurrentInteractor();
-    }
-
-    @Override
-    public void run() {
-        List<Book> bookList = null;
-        try {
-            bookList = bookRepository.getAllBooks();
-        } catch (IOException e) {
-            e.printStackTrace();
-            callback.onError();
-        }
-        final List<Book> finalBookList = bookList;
-        executeInMainThread(new Runnable() {
-            @Override
-            public void run() {
-                callback.onSuccess(finalBookList);
-            }
-        });
-
-    }
+    final List<Book> finalBookList = bookList;
+    executeInMainThread(new Runnable() {
+      @Override
+      public void run() {
+        callback.onSuccess(finalBookList);
+      }
+    });
+  }
 }

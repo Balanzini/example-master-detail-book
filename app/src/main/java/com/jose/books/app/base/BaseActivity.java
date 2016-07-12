@@ -3,6 +3,7 @@ package com.jose.books.app.base;
 import android.app.Activity;
 import android.os.Bundle;
 
+import butterknife.ButterKnife;
 import com.jose.books.app.di.component.ActivityComponent;
 import com.jose.books.app.di.component.DaggerActivityComponent;
 
@@ -19,6 +20,7 @@ public abstract class BaseActivity extends Activity {
         super.onCreate(savedInstanceState);
         setComponent();
         doInjection();
+
     }
 
     private void setComponent(){

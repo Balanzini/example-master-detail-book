@@ -4,26 +4,26 @@ package com.jose.books.domain.model;
  * Created by jose on 7/07/16.
  */
 public class Book {
-    private String image;
+    private String imageId;
     private String title;
     private String author;
     private int publishYear;
     private String id;
 
-    public Book(String id, String title, String author, String image){
-        this.image = image;
+    public Book(String id, String title, String author, String imageId){
+        this.imageId = imageId;
         this.author = author;
-        this.image = image;
+        this.imageId = imageId;
         this.title = title;
         this.id = id;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageId() {
+        return imageId;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageId(String imageId) {
+        this.imageId = imageId;
     }
 
     public String getTitle() {
