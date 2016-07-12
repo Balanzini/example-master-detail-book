@@ -12,7 +12,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class BookListActivity extends BaseActivity implements BookListView  {
@@ -22,7 +22,7 @@ public class BookListActivity extends BaseActivity implements BookListView  {
     @Inject
     BookListPresenter presenter;
 
-    @Bind(R.id.rv_book_list)
+    @BindView(R.id.rv_book_list)
     RecyclerView recyclerViewBook;
 
     private BookAdapter adapter;

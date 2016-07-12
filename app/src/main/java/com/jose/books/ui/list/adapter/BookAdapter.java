@@ -1,7 +1,6 @@
 package com.jose.books.ui.list.adapter;
 
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import com.jose.books.domain.model.Book;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
@@ -57,9 +56,9 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
     class BookViewHolder extends RecyclerView.ViewHolder{
 
-        @Bind(R.id.tv_item_title)
+        @BindView(R.id.tv_item_title)
         TextView tvTitle;
-        @Bind(R.id.tv_item_subtitle) TextView tvSubtitle;
+        @BindView(R.id.tv_item_subtitle) TextView tvSubtitle;
 
         public BookViewHolder(View itemView) {
             super(itemView);

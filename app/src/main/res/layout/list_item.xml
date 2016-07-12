@@ -19,14 +19,26 @@
             android:textSize="@dimen/item_title_size"
             android:text="title"
             android:textColor="@color/grey_80"
+            android:lines="1"
+            android:ellipsize="end"
             />
         <TextView
             android:id="@+id/tv_item_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/item_subtitle_size"
+            android:layout_marginTop="@dimen/half_margin"
+            android:layout_marginBottom="@dimen/half_margin"
             android:text="subtitle"
             android:textColor="@color/grey_80"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_50"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
             />
 
     </LinearLayout>

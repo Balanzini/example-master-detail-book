@@ -2,4 +2,5 @@
 <resources>
     <color name="white">#dadada</color>
     <color name="grey_80">#212121</color>
+    <color name="grey_50">#757575</color>
 </resources>
