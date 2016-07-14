@@ -38,6 +38,7 @@ public class BookListActivity extends BaseActivity implements BookListView {
     presenter.setView(this);
     adapter = new BookAdapter();
     recyclerViewBook.setAdapter(adapter);
+
     presenter.getBooks();
   }
 

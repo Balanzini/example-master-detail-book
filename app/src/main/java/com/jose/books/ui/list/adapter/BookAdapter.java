@@ -6,7 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import butterknife.Bind;
@@ -26,12 +29,15 @@ import butterknife.ButterKnife;
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
   public static final String TAG = "BookAdapter";
-  public static final String BOOK_COVER_ID_PATH = "b/id/";
+  public static final String BOOK_COVER_ID_PATH = "http://covers.openlibrary.org/b/id/";
   public static final String BOOK_COVER_SIZE = "-M";
   public static final String BOOK_COVER_EXTENSION = ".jpg";
 
   private List<Book> bookList;
   private Context context;
+  private Animation animRotate;
+  private Animation animTranslate;
+  private boolean duringAnim = false;
 
   public BookAdapter() {
     bookList = new ArrayList<>();
@@ -40,6 +46,25 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
   @Override
   public BookViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     context = parent.getContext();
+    animRotate = AnimationUtils.loadAnimation(context, R.anim.rotate_anim);
+    animTranslate = AnimationUtils.loadAnimation(context, R.anim.translate_anim);
+    animTranslate.setAnimationListener(new Animation.AnimationListener() {
+      @Override
+      public void onAnimationStart(Animation animation) {
+
+      }
+
+      @Override
+      public void onAnimationEnd(Animation animation) {
+        duringAnim = false;
+      }
+
+      @Override
+      public void onAnimationRepeat(Animation animation) {
+
+      }
+    });
+
     View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
     return new BookViewHolder(view);
   }
@@ -54,16 +79,34 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     return bookList.size();
   }
 
-  private void setBookHolder(Book bookInstance, BookViewHolder holder) {
+  private void setBookHolder(Book bookInstance, final BookViewHolder holder) {
     holder.tvTitle.setText(bookInstance.getTitle());
     holder.tvSubtitle.setText(bookInstance.getAuthor());
-    String imageUrl = RetrofitConstants.BASE_URL
-        + BOOK_COVER_ID_PATH
-        + bookInstance.getImageId()
-        + BOOK_COVER_SIZE
-        + BOOK_COVER_EXTENSION;
-    Glide.with(context).load(imageUrl).into(holder.ivCover);
+    String imageUrl =
+        BOOK_COVER_ID_PATH + bookInstance.getImageId() + BOOK_COVER_SIZE + BOOK_COVER_EXTENSION;
+
+    if (bookInstance.getImageId().compareTo("0") == 0) {
+
+      Glide.with(context).load(R.drawable.error).into(holder.ivCover);
+    } else {
+      Glide.with(context)
+          .load(imageUrl)
+          .placeholder(R.drawable.search)
+          .error(R.drawable.error)
+          .into(holder.ivCover);
+    }
+    Log.i(TAG, bookInstance.getId());
     Log.i(TAG, imageUrl);
+
+    holder.llItem.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        if(!duringAnim){
+          duringAnim = true;
+          holder.llItem.startAnimation(animTranslate);
+        }
+      }
+    });
   }
 
   public void setBookList(List<Book> bookList) {
@@ -77,6 +120,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     @Bind(R.id.tv_item_title) TextView tvTitle;
     @Bind(R.id.tv_item_subtitle) TextView tvSubtitle;
     @Bind(R.id.iv_book_cover) ImageView ivCover;
+    @Bind(R.id.ll_item_list) LinearLayout llItem;
 
     public BookViewHolder(View itemView) {
       super(itemView);
