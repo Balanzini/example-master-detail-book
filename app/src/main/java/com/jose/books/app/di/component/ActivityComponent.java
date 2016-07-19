@@ -5,6 +5,7 @@ import com.jose.books.app.di.module.PresenterModule;
 import com.jose.books.app.di.scope.ActivityScope;
 import com.jose.books.ui.list.view.BookListActivity;
 
+import com.jose.books.ui.main.view.MainActivity;
 import dagger.Component;
 
 /**
@@ -16,4 +17,6 @@ import dagger.Component;
 public interface ActivityComponent {
 
     void inject(BookListActivity bookListActivity);
+
+    void inject(MainActivity mainActivity);
 }

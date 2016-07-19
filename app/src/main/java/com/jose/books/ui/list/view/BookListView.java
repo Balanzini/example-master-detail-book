@@ -10,5 +10,7 @@ import java.util.List;
  */
 public interface BookListView extends View {
 
+    String SEARCH_TERM = "searchTerm";
+
     void onBookAvailable(List<Book> bookList);
 }

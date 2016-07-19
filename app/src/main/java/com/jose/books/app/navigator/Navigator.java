@@ -1,11 +1,13 @@
 package com.jose.books.app.navigator;
 
-import com.jose.books.app.base.BaseActivity;
+import android.app.Activity;
 
 /**
  * Created by jose on 5/07/16.
  */
 public interface Navigator {
 
-    void setActivity(BaseActivity activity);
+    void setActivity(Activity activity);
+
+    void goToListView(String searchTerm);
 }

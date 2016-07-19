@@ -1,5 +1,6 @@
 package com.jose.books.app.di.component;
 
+import com.jose.books.app.base.BaseApplication;
 import com.jose.books.app.di.module.DataSourceModule;
 import com.jose.books.app.di.module.ExecutorModule;
 import com.jose.books.app.di.module.MapperModule;
@@ -37,4 +38,6 @@ public interface ApplicationComponent {
     InteractorExecutor interactorExecutor();
 
     MainThreadExecutor mainThreadExecutor();
+
+    void inject(BaseApplication baseApplication);
 }
