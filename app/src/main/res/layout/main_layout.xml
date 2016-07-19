@@ -39,6 +39,7 @@
         android:layout_marginEnd="@dimen/double_margin"
     >
       <EditText
+          android:id="@+id/et_search_text"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginTop="0dp"
@@ -53,6 +54,7 @@
           android:layout_marginBottom="@dimen/activity_vertical_margin"
       >
         <Button
+            android:id="@+id/bttn_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_search_color"

@@ -10,4 +10,6 @@ import java.util.List;
  */
 public interface BookDataSource {
     List<Book> getBooks() throws IOException;
+
+    List<Book> getBooksByAuthor(String author) throws IOException;
 }

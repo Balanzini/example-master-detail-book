@@ -23,13 +23,14 @@ public class BookListActivity extends BaseActivity implements BookListView {
   @Bind(R.id.rv_book_list) RecyclerView recyclerViewBook;
 
   private BookAdapter adapter;
+  private String searchTerm;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     ButterKnife.bind(this);
-
+    searchTerm = getIntent().getExtras().getString(SEARCH_TERM);
   }
 
   @Override
@@ -39,7 +40,7 @@ public class BookListActivity extends BaseActivity implements BookListView {
     adapter = new BookAdapter();
     recyclerViewBook.setAdapter(adapter);
 
-    presenter.getBooks();
+    presenter.getBooks(searchTerm);
   }
 
   @Override

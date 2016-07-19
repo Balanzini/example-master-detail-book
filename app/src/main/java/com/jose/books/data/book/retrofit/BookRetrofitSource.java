@@ -21,34 +21,45 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class BookRetrofitSource implements BookDataSource {
 
-    private static final String TAG = "BookRetrofitSource";
+  private static final String TAG = "BookRetrofitSource";
 
-    private RetrofitService retrofitService;
-    private BookApiToModelMapper bookMapper;
+  private RetrofitService retrofitService;
+  private BookApiToModelMapper bookMapper;
 
-    public BookRetrofitSource(BookApiToModelMapper bookApiToModelMapper){
-        bookMapper = bookApiToModelMapper;
-        init();
-    }
+  public BookRetrofitSource(BookApiToModelMapper bookApiToModelMapper) {
+    bookMapper = bookApiToModelMapper;
+    init();
+  }
 
-    private void init(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(RetrofitConstants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+  private void init() {
+    Retrofit retrofit = new Retrofit.Builder().baseUrl(RetrofitConstants.BASE_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build();
 
-        retrofitService = retrofit.create(RetrofitService.class);
+    retrofitService = retrofit.create(RetrofitService.class);
+  }
 
-    }
-    @Override
-    public List<Book> getBooks() throws IOException {
-        Call<OLBookList> call = retrofitService.getBooks();
+  @Override
+  public List<Book> getBooks() throws IOException {
+    Call<OLBookList> call = retrofitService.getBooks();
 
-        OLBookList olBookList;
+    OLBookList olBookList;
 
-        olBookList = call.execute().body();
+    olBookList = call.execute().body();
 
-        return bookMapper.mapBookListResponseToModel(olBookList);
+    return bookMapper.mapBookListResponseToModel(olBookList);
+  }
 
-    }
+  @Override
+  public List<Book> getBooksByAuthor(String author) throws IOException {
+    Call<OLBookList> call = retrofitService.getBooksByAuthor(author);
+
+    OLBookList olBookList;
+
+    olBookList = call.execute().body();
+
+    Log.i("BookRetrofitSource", "search id: " + olBookList.getOlBookList().size());
+
+    return bookMapper.mapBookListResponseToModel(olBookList);
+  }
 }

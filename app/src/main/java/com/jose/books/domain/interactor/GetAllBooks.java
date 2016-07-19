@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface GetAllBooks extends Interactor {
 
-  void getAllBooks(Callback callback);
+  void getAllBooks(String author, Callback callback);
 
   interface Callback {
     void onSuccess(List<Book> book);

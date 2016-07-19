@@ -1,5 +1,6 @@
 package com.jose.books.domain.repository;
 
+import android.util.Log;
 import com.jose.books.data.book.BookDataSource;
 import com.jose.books.domain.model.Book;
 
@@ -38,6 +39,16 @@ public class BookRepositoryImp implements BookRepository {
         bookMap.clear();
         for(Book book : bookDataSource.getBooks()){
             bookMap.put(book.getId(), book);
+        }
+        return getBookList();
+    }
+
+    @Override
+    public List<Book> getAllBooksByAuthor(String author) throws IOException {
+        bookMap.clear();
+        for(Book book : bookDataSource.getBooksByAuthor(author)){
+            bookMap.put(book.getId(), book);
+            Log.i("BookRetrofitSource", "search id: " + book.getId());
         }
         return getBookList();
     }

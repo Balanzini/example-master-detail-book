@@ -1,5 +1,6 @@
 package com.jose.books.domain.interactor;
 
+import android.util.Log;
 import com.jose.books.app.base.BaseInteractor;
 import com.jose.books.app.executor.InteractorExecutor;
 import com.jose.books.app.executor.MainThreadExecutor;
@@ -16,6 +17,7 @@ public class GetAllBooksImp extends BaseInteractor implements GetAllBooks {
 
   private Callback callback;
   private BookRepository bookRepository;
+  private String author;
 
   public GetAllBooksImp(InteractorExecutor interactorExecutor,
       MainThreadExecutor mainThreadExecutor, BookRepository bookRepository) {
@@ -24,8 +26,9 @@ public class GetAllBooksImp extends BaseInteractor implements GetAllBooks {
   }
 
   @Override
-  public void getAllBooks(Callback callback) {
+  public void getAllBooks(String author, Callback callback) {
     this.callback = callback;
+    this.author = author;
     executeCurrentInteractor();
   }
 
@@ -33,7 +36,10 @@ public class GetAllBooksImp extends BaseInteractor implements GetAllBooks {
   public void run() {
     List<Book> bookList = null;
     try {
-      bookList = bookRepository.getAllBooks();
+
+      bookList = bookRepository.getAllBooksByAuthor(author);
+      Log.i("BookRetrofitSource", "search term: " + bookList.size());
+
     } catch (IOException e) {
       e.printStackTrace();
       callback.onError();

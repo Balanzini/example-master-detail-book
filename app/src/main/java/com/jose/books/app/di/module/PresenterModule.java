@@ -1,9 +1,12 @@
 package com.jose.books.app.di.module;
 
+import com.jose.books.app.navigator.Navigator;
 import com.jose.books.domain.interactor.GetAllBooks;
 import com.jose.books.ui.list.presenter.BookListPresenter;
 import com.jose.books.ui.list.presenter.BookListPresenterImp;
 
+import com.jose.books.ui.main.presenter.MainPresenter;
+import com.jose.books.ui.main.presenter.MainPresenterImp;
 import dagger.Module;
 import dagger.Provides;
 
@@ -13,8 +16,13 @@ import dagger.Provides;
 @Module
 public class PresenterModule {
 
-    @Provides
-    BookListPresenter provideBookListPresenter(GetAllBooks getAllBooks){
-        return new BookListPresenterImp(getAllBooks);
-    }
+  @Provides
+  BookListPresenter provideBookListPresenter(GetAllBooks getAllBooks) {
+    return new BookListPresenterImp(getAllBooks);
+  }
+
+  @Provides
+  MainPresenter provideMainPresenter(Navigator navigator) {
+    return new MainPresenterImp(navigator);
+  }
 }

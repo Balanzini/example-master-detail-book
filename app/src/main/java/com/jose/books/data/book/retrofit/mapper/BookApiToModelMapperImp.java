@@ -1,5 +1,6 @@
 package com.jose.books.data.book.retrofit.mapper;
 
+import android.util.Log;
 import com.jose.books.data.book.retrofit.model.OLBook;
 import com.jose.books.data.book.retrofit.model.OLBookList;
 import com.jose.books.domain.model.Book;
@@ -17,7 +18,9 @@ public class BookApiToModelMapperImp implements BookApiToModelMapper {
     List<Book> bookList = new ArrayList<Book>();
     for (OLBook olBook : responseBookList.getOlBookList()) {
       bookList.add(mapBookResponseToModel(olBook));
+      Log.i("BookRetrofitSource", "mapper: " + olBook.getTitle());
     }
+    Log.i("BookRetrofitSource", "mapper end: ");
     return bookList;
   }
 

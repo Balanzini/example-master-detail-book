@@ -22,8 +22,8 @@ public class BookListPresenterImp extends BookListPresenter {
     }
 
     @Override
-    public void getBooks() {
-        getAllBooks.getAllBooks(new GetAllBooks.Callback() {
+    public void getBooks(String author) {
+        getAllBooks.getAllBooks(author, new GetAllBooks.Callback() {
             @Override
             public void onSuccess(List<Book> book) {
                 Log.i(TAG, book.size() + "");
