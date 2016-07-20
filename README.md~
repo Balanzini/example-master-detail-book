@@ -2,6 +2,10 @@
 
 En desarrollo...
 
+## Screenshots
+
+![alt text](art/main.png "Description goes here")
+
 ### Develop by Jose Luis Balanza
 
 * [LinkedIn]
