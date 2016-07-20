@@ -3,4 +3,7 @@
 
   <!-- Main View -->
   <string name="search">Buscar</string>
+
+  <!-- List View -->
+  <string name="searching">Buscando&#8230;</string>
 </resources>

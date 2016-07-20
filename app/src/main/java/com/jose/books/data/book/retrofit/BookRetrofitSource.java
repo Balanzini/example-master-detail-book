@@ -43,23 +43,29 @@ public class BookRetrofitSource implements BookDataSource {
   public List<Book> getBooks() throws IOException {
     Call<OLBookList> call = retrofitService.getBooks();
 
-    OLBookList olBookList;
-
-    olBookList = call.execute().body();
-
-    return bookMapper.mapBookListResponseToModel(olBookList);
+    return doQuery(call);
   }
 
   @Override
   public List<Book> getBooksByAuthor(String author) throws IOException {
     Call<OLBookList> call = retrofitService.getBooksByAuthor(author);
 
+    return doQuery(call);
+  }
+
+  @Override
+  public List<Book> getBooksByKey(String key) throws IOException {
+    Call<OLBookList> call = retrofitService.getBooksByKey(key);
+
+    return doQuery(call);
+  }
+
+  private List<Book> doQuery(Call<OLBookList> call) throws IOException {
     OLBookList olBookList;
 
     olBookList = call.execute().body();
 
-    Log.i("BookRetrofitSource", "search id: " + olBookList.getOlBookList().size());
-
+    Log.i(TAG, "Response size: " + olBookList.getOlBookList().size());
     return bookMapper.mapBookListResponseToModel(olBookList);
   }
 }

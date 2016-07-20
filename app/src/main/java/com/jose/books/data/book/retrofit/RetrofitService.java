@@ -16,4 +16,7 @@ public interface RetrofitService {
 
     @GET(RetrofitConstants.BOOK_SEARCH_QUERY)
     Call<OLBookList> getBooksByAuthor(@Query("author") String author);
+
+    @GET(RetrofitConstants.BOOK_SEARCH_QUERY)
+    Call<OLBookList> getBooksByKey(@Query("q") String key);
 }

@@ -2,6 +2,11 @@ package com.jose.books.ui.list.view;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.jose.books.R;
@@ -21,16 +26,20 @@ public class BookListActivity extends BaseActivity implements BookListView {
   @Inject BookListPresenter presenter;
 
   @Bind(R.id.rv_book_list) RecyclerView recyclerViewBook;
+  @Bind(R.id.ll_searching_view) LinearLayout llSearching;
+  @Bind(R.id.tv_loading) TextView tvLoading;
 
   private BookAdapter adapter;
   private String searchTerm;
+  private Animation pulseAnimation;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
+    setContentView(R.layout.book_list_layout);
     ButterKnife.bind(this);
     searchTerm = getIntent().getExtras().getString(SEARCH_TERM);
+    pulseAnimation = AnimationUtils.loadAnimation(this, R.anim.pulse_anim);
   }
 
   @Override
@@ -41,10 +50,12 @@ public class BookListActivity extends BaseActivity implements BookListView {
     recyclerViewBook.setAdapter(adapter);
 
     presenter.getBooks(searchTerm);
+    tvLoading.setAnimation(pulseAnimation);
   }
 
   @Override
   public void onBookAvailable(List<Book> bookList) {
+    llSearching.setVisibility(View.GONE);
     adapter.setBookList(bookList);
   }
 

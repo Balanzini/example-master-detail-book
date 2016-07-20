@@ -12,4 +12,6 @@ public interface BookDataSource {
     List<Book> getBooks() throws IOException;
 
     List<Book> getBooksByAuthor(String author) throws IOException;
+
+    List<Book> getBooksByKey(String key) throws IOException;
 }
