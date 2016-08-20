@@ -2,6 +2,9 @@ package com.jose.books.app.di.module;
 
 import com.jose.books.app.navigator.Navigator;
 import com.jose.books.domain.interactor.GetAllBooks;
+import com.jose.books.domain.interactor.GetBookById;
+import com.jose.books.ui.detail.presenter.DetailPresenter;
+import com.jose.books.ui.detail.presenter.DetailPresenterImp;
 import com.jose.books.ui.list.presenter.BookListPresenter;
 import com.jose.books.ui.list.presenter.BookListPresenterImp;
 
@@ -24,5 +27,10 @@ public class PresenterModule {
   @Provides
   MainPresenter provideMainPresenter(Navigator navigator) {
     return new MainPresenterImp(navigator);
+  }
+
+  @Provides
+  DetailPresenter provideDetailPresenter(GetBookById getBookById){
+    return new DetailPresenterImp(getBookById);
   }
 }

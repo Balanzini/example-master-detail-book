@@ -6,4 +6,11 @@
 
   <!-- List View -->
   <string name="searching">Searching&#8230;</string>
+
+  <!-- Detail View -->
+  <string name="title">Title:</string>
+  <string name="author">Author:</string>
+  <string name="publish_year">Publish year:</string>
+  <string name="publisher">Publisher:</string>
+  <string name="language">Language:</string>
 </resources>

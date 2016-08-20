@@ -3,6 +3,7 @@ package com.jose.books.app.di.component;
 import com.jose.books.app.di.module.InteractorModule;
 import com.jose.books.app.di.module.PresenterModule;
 import com.jose.books.app.di.scope.ActivityScope;
+import com.jose.books.ui.detail.view.DetailActivity;
 import com.jose.books.ui.list.view.BookListActivity;
 
 import com.jose.books.ui.main.view.MainActivity;
@@ -19,4 +20,6 @@ public interface ActivityComponent {
     void inject(BookListActivity bookListActivity);
 
     void inject(MainActivity mainActivity);
+
+    void inject(DetailActivity detailActivity);
 }

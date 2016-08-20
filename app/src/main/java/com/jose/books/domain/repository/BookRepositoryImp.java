@@ -19,7 +19,7 @@ public class BookRepositoryImp implements BookRepository {
 
   public BookRepositoryImp(BookDataSource bookDataSource) {
     this.bookDataSource = bookDataSource;
-    bookMap = new HashMap<String, Book>();
+    bookMap = new HashMap<>();
   }
 
   @Override

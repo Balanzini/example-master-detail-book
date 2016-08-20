@@ -36,15 +36,27 @@ public class GetAllBooksImp extends BaseInteractor implements GetAllBooks {
     List<Book> bookList = null;
     try {
       bookList = bookRepository.getAllBooksByKey(key);
+      endSuccess(bookList);
     } catch (IOException e) {
       e.printStackTrace();
-      callback.onError();
+      endError();
     }
-    final List<Book> finalBookList = bookList;
+  }
+
+  private void endSuccess(final List<Book> finalBookList){
     executeInMainThread(new Runnable() {
       @Override
       public void run() {
         callback.onSuccess(finalBookList);
+      }
+    });
+  }
+
+  private void endError(){
+    executeInMainThread(new Runnable() {
+      @Override
+      public void run() {
+        callback.onError();
       }
     });
   }
