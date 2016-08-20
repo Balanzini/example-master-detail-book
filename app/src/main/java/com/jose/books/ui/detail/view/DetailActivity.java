@@ -1,9 +1,11 @@
 package com.jose.books.ui.detail.view;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import com.bumptech.glide.Glide;
 import com.jose.books.R;
 import com.jose.books.app.base.BaseActivity;
 import com.jose.books.ui.detail.presenter.DetailPresenter;
@@ -16,7 +18,11 @@ public class DetailActivity extends BaseActivity implements DetailView {
 
   @Inject DetailPresenter presenter;
 
+  @Bind(R.id.iv_detail_cover) ImageView ivCover;
   @Bind(R.id.tv_detail_title) TextView tvTitle;
+  @Bind(R.id.tv_detail_publisher) TextView tvPublisher;
+  @Bind(R.id.tv_detail_author) TextView tvAuthor;
+  @Bind(R.id.tv_detail_publish_year) TextView tvPublishYear;
 
   private String bookId;
 
@@ -36,6 +42,39 @@ public class DetailActivity extends BaseActivity implements DetailView {
     presenter.searchBook(bookId);
   }
 
+  @Override
+  public void setImage(String urlImage) {
+    Glide.with(getApplicationContext())
+        .load(urlImage)
+        .placeholder(R.drawable.search)
+        .error(R.drawable.error)
+        .into(ivCover);
+  }
+
+  @Override
+  public void setErrorImage() {
+    Glide.with(this).load(R.drawable.error).into(ivCover);
+  }
+
+  @Override
+  public void setTitle(String title) {
+    tvTitle.setText(title);
+  }
+
+  @Override
+  public void setAuthor(String author) {
+    tvAuthor.setText(author);
+  }
+
+  @Override
+  public void setPublisher(String publisher) {
+    tvPublisher.setText(publisher);
+  }
+
+  @Override
+  public void setPublishYear(String publishYear) {
+    tvPublishYear.setText(publishYear);
+  }
 
   @Override
   protected void doInjection() {

@@ -10,4 +10,6 @@ public interface Navigator {
     void setActivity(Activity activity);
 
     void goToListView(String searchTerm);
+
+    void goToDetailView(String bookId);
 }

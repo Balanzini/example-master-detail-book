@@ -9,4 +9,6 @@ import com.jose.books.ui.list.view.BookListView;
 public abstract class BookListPresenter extends BasePresenter<BookListView> {
 
     public abstract void getBooks(String author);
+
+    public abstract void onItemClick(String idBook);
 }

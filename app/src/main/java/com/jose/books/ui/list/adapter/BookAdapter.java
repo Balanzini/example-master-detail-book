@@ -15,6 +15,7 @@ import android.widget.TextView;
 import butterknife.Bind;
 import com.bumptech.glide.Glide;
 import com.jose.books.R;
+import com.jose.books.data.book.Constants;
 import com.jose.books.data.book.retrofit.RetrofitConstants;
 import com.jose.books.domain.model.Book;
 
@@ -29,15 +30,14 @@ import butterknife.ButterKnife;
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
   public static final String TAG = "BookAdapter";
-  public static final String BOOK_COVER_ID_PATH = "http://covers.openlibrary.org/b/id/";
-  public static final String BOOK_COVER_SIZE = "-M";
-  public static final String BOOK_COVER_EXTENSION = ".jpg";
 
   private List<Book> bookList;
   private Context context;
   private Animation animRotate;
   private Animation animTranslate;
   private boolean duringAnim = false;
+  private OnClick onClick;
+  private String bookIdClicked;
 
   public BookAdapter() {
     bookList = new ArrayList<>();
@@ -57,6 +57,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
       @Override
       public void onAnimationEnd(Animation animation) {
         duringAnim = false;
+        onClick.onBookClicked(bookIdClicked);
       }
 
       @Override
@@ -79,11 +80,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     return bookList.size();
   }
 
-  private void setBookHolder(Book bookInstance, final BookViewHolder holder) {
+  private void setBookHolder(final Book bookInstance, final BookViewHolder holder) {
     holder.tvTitle.setText(bookInstance.getTitle());
     holder.tvSubtitle.setText(bookInstance.getAuthor());
-    String imageUrl =
-        BOOK_COVER_ID_PATH + bookInstance.getImageId() + BOOK_COVER_SIZE + BOOK_COVER_EXTENSION;
+    String imageUrl = Constants.BOOK_COVER_ID_PATH
+        + bookInstance.getImageId()
+        + Constants.BOOK_COVER_SIZE_M
+        + Constants.BOOK_COVER_EXTENSION;
 
     if (bookInstance.getImageId().compareTo("0") == 0) {
 
@@ -101,9 +104,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     holder.llItem.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        if(!duringAnim){
+        if (!duringAnim) {
           duringAnim = true;
           holder.llItem.startAnimation(animTranslate);
+          bookIdClicked = bookInstance.getId();
         }
       }
     });
@@ -113,6 +117,14 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     this.bookList.clear();
     this.bookList.addAll(bookList);
     notifyDataSetChanged();
+  }
+
+  public void setOnClick(OnClick onClick) {
+    this.onClick = onClick;
+  }
+
+  public interface OnClick {
+    void onBookClicked(String bookId);
   }
 
   class BookViewHolder extends RecyclerView.ViewHolder {

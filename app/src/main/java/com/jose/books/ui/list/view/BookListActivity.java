@@ -47,6 +47,12 @@ public class BookListActivity extends BaseActivity implements BookListView {
     super.onResume();
     presenter.setView(this);
     adapter = new BookAdapter();
+    adapter.setOnClick(new BookAdapter.OnClick() {
+      @Override
+      public void onBookClicked(String bookId) {
+        presenter.onItemClick(bookId);
+      }
+    });
     recyclerViewBook.setAdapter(adapter);
 
     presenter.getBooks(searchTerm);

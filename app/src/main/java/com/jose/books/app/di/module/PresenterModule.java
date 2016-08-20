@@ -20,8 +20,8 @@ import dagger.Provides;
 public class PresenterModule {
 
   @Provides
-  BookListPresenter provideBookListPresenter(GetAllBooks getAllBooks) {
-    return new BookListPresenterImp(getAllBooks);
+  BookListPresenter provideBookListPresenter(Navigator navigator, GetAllBooks getAllBooks) {
+    return new BookListPresenterImp(navigator, getAllBooks);
   }
 
   @Provides

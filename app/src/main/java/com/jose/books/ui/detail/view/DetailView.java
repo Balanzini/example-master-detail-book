@@ -8,4 +8,16 @@ import com.jose.books.ui.View;
 public interface DetailView extends View{
 
   String BOOK_ID = "bookId";
+
+  void setImage(String urlImage);
+
+  void setErrorImage();
+
+  void setTitle(String title);
+
+  void setAuthor(String author);
+
+  void setPublisher(String publisher);
+
+  void setPublishYear(String publishYear);
 }
