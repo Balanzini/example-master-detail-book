@@ -24,22 +24,26 @@ public class DetailActivity extends BaseActivity implements DetailView {
   @Bind(R.id.tv_detail_author) TextView tvAuthor;
   @Bind(R.id.tv_detail_publish_year) TextView tvPublishYear;
 
-  private String bookId;
+  //private String bookId;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.detail_layout);
     ButterKnife.bind(this);
-    bookId = getIntent().getExtras().getString(BOOK_ID);
-
+    //bookId = getIntent().getExtras().getString(BOOK_ID);
+    Glide.with(this)
+        .load(
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Android_robot_2014.svg/100px-Android_robot_2014.svg.png")
+        .centerCrop()
+        .into(ivCover);
   }
 
   @Override
   protected void onResume() {
     super.onResume();
-    presenter.setView(this);
-    presenter.searchBook(bookId);
+    //presenter.setView(this);
+    //presenter.searchBook(bookId);
   }
 
   @Override
@@ -53,7 +57,11 @@ public class DetailActivity extends BaseActivity implements DetailView {
 
   @Override
   public void setErrorImage() {
-    Glide.with(this).load(R.drawable.error).into(ivCover);
+    Glide.with(this)
+        .load(
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Android_robot_2014.svg/100px-Android_robot_2014.svg.png")
+        .centerCrop()
+        .into(ivCover);
   }
 
   @Override

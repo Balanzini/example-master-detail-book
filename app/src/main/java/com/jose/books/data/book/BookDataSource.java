@@ -9,7 +9,7 @@ import java.util.List;
  * Created by jose on 7/07/16.
  */
 public interface BookDataSource {
-    List<Book> getBooks() throws IOException;
+    List<Book> getBooks();
 
     List<Book> getBooksByAuthor(String author) throws IOException;
 

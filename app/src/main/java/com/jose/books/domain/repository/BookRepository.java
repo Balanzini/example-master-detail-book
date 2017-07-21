@@ -14,9 +14,9 @@ public interface BookRepository {
 
     List<Book> getBookList();
 
-    List<Book> getAllBooks() throws IOException;
+    List<Book> getAllBooks();
 
-    List<Book> getAllBooksByAuthor(String author) throws IOException;
+    List<Book> getAllBooksByAuthor(String author);
 
     List<Book> getAllBooksByKey(String key) throws IOException;
 

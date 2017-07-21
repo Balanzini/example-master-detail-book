@@ -34,14 +34,18 @@ public class BookRepositoryImp implements BookRepository {
   }
 
   @Override
-  public List<Book> getAllBooks() throws IOException {
+  public List<Book> getAllBooks() {
     setBookMap(bookDataSource.getBooks());
     return getBookList();
   }
 
   @Override
-  public List<Book> getAllBooksByAuthor(String author) throws IOException {
-    setBookMap(bookDataSource.getBooksByAuthor(author));
+  public List<Book> getAllBooksByAuthor(String author) {
+    try {
+      setBookMap(bookDataSource.getBooksByAuthor(author));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     return getBookList();
   }
 

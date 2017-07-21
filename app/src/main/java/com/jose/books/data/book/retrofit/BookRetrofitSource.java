@@ -8,6 +8,7 @@ import com.jose.books.data.book.retrofit.model.OLBookList;
 import com.jose.books.domain.model.Book;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -40,10 +41,14 @@ public class BookRetrofitSource implements BookDataSource {
   }
 
   @Override
-  public List<Book> getBooks() throws IOException {
+  public List<Book> getBooks() {
     Call<OLBookList> call = retrofitService.getBooks();
 
-    return doQuery(call);
+    try {
+      return doQuery(call);
+    } catch (IOException e) {
+      return new ArrayList<Book>();
+    }
   }
 
   @Override

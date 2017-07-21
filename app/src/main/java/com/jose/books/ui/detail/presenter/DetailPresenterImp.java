@@ -23,8 +23,8 @@ public class DetailPresenterImp extends DetailPresenter {
         view.setTitle(book.getTitle());
         view.setAuthor(book.getAuthor());
         view.setPublishYear(String.valueOf(book.getPublishYear()));
-
-        if (book.getImageId().compareTo("0") == 0) {
+        view.setErrorImage();
+        /*if (book.getImageId().compareTo("0") == 0) {
           view.setErrorImage();
         } else {
           String imageUrl = Constants.BOOK_COVER_ID_PATH
@@ -32,12 +32,12 @@ public class DetailPresenterImp extends DetailPresenter {
               + Constants.BOOK_COVER_SIZE_M
               + Constants.BOOK_COVER_EXTENSION;
           view.setImage(imageUrl);
-        }
+        }*/
       }
 
       @Override
       public void onError() {
-
+        view.setErrorImage();
       }
     });
   }
