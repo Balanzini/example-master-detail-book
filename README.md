@@ -14,7 +14,7 @@ The application is an example of Clean Architecture with MVP ( Model-View-Presen
 
 ## Screenshots
 
-![alt text](art/main.png "Description goes here")
+![alt text](art/main.png "Main view")
 
 ### Develop by Jose Luis Balanza
 
